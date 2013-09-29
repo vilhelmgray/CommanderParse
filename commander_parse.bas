@@ -140,6 +140,7 @@ WHILE 1=1
         ELSEIF Left(cmd, 3) = "USE" THEN
                 PRINT "You try to USE "; legend(hand); "."
                 
+                ' Determine item in hand
                 IF hand = 3 THEN
                         ' Look around for a locked door
                         IF map(yPos-1, xPos) = 2 THEN

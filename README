@@ -3,6 +3,20 @@ Commander Parse
 
 A simple dungeon crawler game to showcase a simple verb-noun command parser.
 
+Instructions
+--------------
+
+Exit the dungeon through the locked door to win the game.
+
+The following commands are available:
+        GO      - Move in a specified direction
+        GRAB    - Grab a specified item
+        HELP    - Display this help
+        LOOK    - Look around current position
+        QUIT    - Quit from the game
+        USE     - Use the current item in your hand
+
 Contact
 --------------
+
 William Breathitt Gray <vilhelm.gray@gmail.com>
