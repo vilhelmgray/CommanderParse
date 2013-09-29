@@ -21,3 +21,24 @@
 ' ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 ' (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 ' SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+SCREEN 12
+
+' MAP LEGEND:
+' 0 = empty space
+' 1 = wall
+' 2 = player
+' 3 = locked door
+' 4 = key
+DIM map(9, 9) AS INTEGER = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, _
+                             { 1, 2, 1, 0, 0, 0, 0, 0, 0, 1 }, _ 
+                             { 1, 0, 1, 1, 0, 1, 1, 1, 0, 1 }, _ 
+                             { 1, 0, 1, 1, 0, 1, 1, 1, 1, 1 }, _ 
+                             { 1, 0, 0, 0, 0, 0, 0, 0, 0, 3 }, _ 
+                             { 1, 0, 1, 1, 1, 1, 1, 0, 1, 1 }, _ 
+                             { 1, 0, 1, 0, 0, 0, 1, 0, 1, 1 }, _ 
+                             { 1, 0, 1, 0, 4, 0, 0, 0, 0, 1 }, _ 
+                             { 1, 0, 1, 0, 0, 0, 1, 1, 0, 1 }, _ 
+                             { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 } }
+
+SLEEP
