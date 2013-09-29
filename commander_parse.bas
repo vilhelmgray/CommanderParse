@@ -22,7 +22,8 @@
 ' (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 ' SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-SCREEN 12
+DIM xPos AS INTEGER = 1
+DIM yPos AS INTEGER = 1
 
 ' MAP LEGEND:
 ' 0 = empty space
@@ -41,4 +42,22 @@ DIM map(9, 9) AS INTEGER = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, _
                              { 1, 0, 1, 0, 0, 0, 1, 1, 0, 1 }, _ 
                              { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 } }
 
-SLEEP
+WHILE 1=1
+        ' Get command from player
+        DIM cmd AS STRING
+        INPUT "> ", cmd
+
+        ' Capitalize all letters to make it easier to parse
+        cmd = UCase(cmd)
+        
+        IF Left(cmd, 4) = "HELP" THEN
+                PRINT "The following commands are available:"
+                PRINT "    HELP    - Prints this help page"
+                PRINT "    QUIT    - Quits from the game"
+        ELSEIF Left(cmd, 4) = "QUIT" THEN
+                PRINT "Bye!"
+                EXIT WHILE
+        ELSE
+                PRINT "You cannot "; cmd; "."
+        END IF
+WEND
