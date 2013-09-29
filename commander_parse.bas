@@ -48,6 +48,9 @@ DIM map(9, 9) AS INTEGER = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, _
 ' item in player's hand
 DIM hand AS INTEGER = 0
 
+PRINT "THE MUNDANE ADVENTURE OF COMMANDER PARSE"
+PRINT "========================================"
+
 WHILE 1=1
         ' Get command from player
         DIM cmd AS STRING
@@ -96,39 +99,71 @@ WHILE 1=1
                 ' Parse item
                 IF Left(item, 3) = "KEY" THEN
                         ' Look around for a key
-                        IF map(yPos-1, xPos) = 2 THEN
-                                hand = 2
+                        IF map(yPos-1, xPos) = 3 THEN
+                                hand = 3
                                 map(yPos-1, xPos) = 0
-                        ELSEIF map(yPos, xPos+1) = 2 THEN
-                                hand = 2
+                                PRINT "You pick up "; legend(hand); "."
+                        ELSEIF map(yPos, xPos+1) = 3 THEN
+                                hand = 3
                                 map(yPos, xPos+1) = 0
-                        ELSEIF map(yPos+1, xPos) = 2 THEN
-                                hand = 2
+                                PRINT "You pick up "; legend(hand); "."
+                        ELSEIF map(yPos+1, xPos) = 3 THEN
+                                hand = 3
                                 map(yPos+1, xPos) = 0
-                        ELSEIF map(yPos, xPos-1) = 2 THEN
-                                hand = 2
+                                PRINT "You pick up "; legend(hand); "."
+                        ELSEIF map(yPos, xPos-1) = 3 THEN
+                                hand = 3
                                 map(yPos, xPos-1) = 0
+                                PRINT "You pick up "; legend(hand); "."
                         ELSE
                                 PRINT "What KEY?"
                         END IF
                 ELSE
                         PRINT "GRAB what?"
                 END IF
+        ELSEIF Left(cmd, 4) = "HELP" THEN
+                PRINT "The following commands are available:"
+                PRINT "    GO      - Move in a specified direction"
+                PRINT "    GRAB    - Grab a specified item"
+                PRINT "    HELP    - Display this help"
+                PRINT "    LOOK    - Look around current position"
+                PRINT "    QUIT    - Quit from the game"
+                PRINT "    USE     - Use the current item in your hand"
         ELSEIF Left(cmd, 4) = "LOOK" THEN
                 PRINT "You see "; legend(map(yPos-1, xPos)); " to the NORTH."
                 PRINT "You see "; legend(map(yPos, xPos+1)); " to the EAST."
                 PRINT "You see "; legend(map(yPos+1, xPos)); " to the SOUTH."
                 PRINT "You see "; legend(map(yPos, xPos-1)); " to the WEST."
-        ELSEIF Left(cmd, 4) = "HELP" THEN
-                PRINT "The following commands are available:"
-                PRINT "    GO      - Move in a specified direction"
-                PRINT "    GRAB    - Grab a specified item"
-                PRINT "    LOOK    - Look around current position"
-                PRINT "    HELP    - Display this help"
-                PRINT "    QUIT    - Quit from the game"
         ELSEIF Left(cmd, 4) = "QUIT" THEN
                 PRINT "Bye!"
                 EXIT WHILE
+        ELSEIF Left(cmd, 3) = "USE" THEN
+                PRINT "You try to USE "; legend(hand); "."
+                
+                IF hand = 3 THEN
+                        ' Look around for a locked door
+                        IF map(yPos-1, xPos) = 2 THEN
+                                PRINT "You unlock the door."
+                                PRINT "You won the game!"
+                                EXIT WHILE
+                        ELSEIF map(yPos, xPos+1) = 2 THEN
+                                PRINT "You unlock the door."
+                                PRINT "You won the game!"
+                                EXIT WHILE
+                        ELSEIF map(yPos+1, xPos) = 2 THEN
+                                PRINT "You unlock the door."
+                                PRINT "You won the game!"
+                                EXIT WHILE
+                        ELSEIF map(yPos, xPos-1) = 2 THEN
+                                PRINT "You unlock the door."
+                                PRINT "You won the game!"
+                                EXIT WHILE
+                        ELSE
+                                PRINT "There are no locked doors near you."
+                        END IF
+                ELSE
+                        PRINT "Nothing happens."
+                END IF
         ELSE
                 PRINT "You cannot "; cmd; "."
         END IF
