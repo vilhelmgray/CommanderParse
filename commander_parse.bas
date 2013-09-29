@@ -45,6 +45,9 @@ DIM map(9, 9) AS INTEGER = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, _
                              { 1, 0, 1, 0, 0, 0, 1, 1, 0, 1 }, _ 
                              { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 } }
 
+' item in player's hand
+DIM hand AS INTEGER = 0
+
 WHILE 1=1
         ' Get command from player
         DIM cmd AS STRING
@@ -55,8 +58,8 @@ WHILE 1=1
         
         ' Parse command
         IF Left(cmd, 2) = "GO" THEN
-                ' Get direction and trim off leading spaces from it
-                DIM direction AS STRING = LTrim(Mid(cmd, 4))
+                ' Get direction and trim off leading spaces
+                DIM direction AS STRING = LTrim(Mid(cmd, 3))
                 
                 ' Parse direction
                 IF Left(direction, 5) = "NORTH" THEN
@@ -86,6 +89,31 @@ WHILE 1=1
                 ELSE
                         PRINT "GO where?"
                 END IF
+        ELSEIF Left(cmd, 4) = "GRAB" THEN
+                ' Get item name and trim off leading spaces
+                DIM item AS STRING = LTrim(Mid(cmd, 5))
+                
+                ' Parse item
+                IF Left(item, 3) = "KEY" THEN
+                        ' Look around for a key
+                        IF map(yPos-1, xPos) = 2 THEN
+                                hand = 2
+                                map(yPos-1, xPos) = 0
+                        ELSEIF map(yPos, xPos+1) = 2 THEN
+                                hand = 2
+                                map(yPos, xPos+1) = 0
+                        ELSEIF map(yPos+1, xPos) = 2 THEN
+                                hand = 2
+                                map(yPos+1, xPos) = 0
+                        ELSEIF map(yPos, xPos-1) = 2 THEN
+                                hand = 2
+                                map(yPos, xPos-1) = 0
+                        ELSE
+                                PRINT "What KEY?"
+                        END IF
+                ELSE
+                        PRINT "GRAB what?"
+                END IF
         ELSEIF Left(cmd, 4) = "LOOK" THEN
                 PRINT "You see "; legend(map(yPos-1, xPos)); " to the NORTH."
                 PRINT "You see "; legend(map(yPos, xPos+1)); " to the EAST."
@@ -94,6 +122,7 @@ WHILE 1=1
         ELSEIF Left(cmd, 4) = "HELP" THEN
                 PRINT "The following commands are available:"
                 PRINT "    GO      - Move in a specified direction"
+                PRINT "    GRAB    - Grab a specified item"
                 PRINT "    LOOK    - Look around current position"
                 PRINT "    HELP    - Display this help"
                 PRINT "    QUIT    - Quit from the game"
