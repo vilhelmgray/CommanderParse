@@ -27,14 +27,14 @@ DIM yPos AS INTEGER = 1
 
 ' MAP LEGEND:
 ' 0 = empty space
-' 1 = a stone WALL
-' 2 = a PLAYER
-' 3 = a locked DOOR
+' 1 = a stone wall
+' 2 = a player
+' 3 = a locked door
 ' 4 = an old KEY
 DIM legend(4) AS STRING = { "empty space", _
-                            "a stone WALL" _
-                            "a PLAYER" _
-                            "a locked DOOR" _
+                            "a stone wall", _
+                            "a player", _
+                            "a locked door", _
                             "an old KEY" }
 DIM map(9, 9) AS INTEGER = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, _
                              { 1, 2, 1, 0, 0, 0, 0, 0, 0, 1 }, _ 
@@ -58,10 +58,10 @@ WHILE 1=1
         ' Parse command
         IF Left(cmd, 2) = "GO" THEN
         ELSEIF Left(cmd, 4) = "LOOK" THEN
-               PRINT "You see "; legend(map(xPos, yPos-1)); "to the NORTH.";
-               PRINT "You see "; legend(map(xPos+1, yPos)); "to the EAST.";
-               PRINT "You see "; legend(map(xPos, yPos+1)); "to the SOUTH.";
-               PRINT "You see "; legend(map(xPos-1, yPos)); "to the WEST."
+               PRINT "You see "; legend(map(yPos-1, xPos)); " to the NORTH."
+               PRINT "You see "; legend(map(yPos, xPos+1)); " to the EAST."
+               PRINT "You see "; legend(map(yPos+1, xPos)); " to the SOUTH."
+               PRINT "You see "; legend(map(yPos, xPos-1)); " to the WEST."
         ELSEIF Left(cmd, 4) = "HELP" THEN
                 PRINT "The following commands are available:"
                 PRINT "    HELP    - Prints this help page"
